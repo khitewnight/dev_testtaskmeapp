@@ -43,6 +43,7 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: err.message });
 });
 
-app.listen(3001, () => {
-  console.log('Listening on port 3001');
+const port = process.env.port || 3001
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
 });
