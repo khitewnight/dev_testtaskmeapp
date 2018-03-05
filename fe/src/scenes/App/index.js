@@ -68,7 +68,7 @@ class App extends React.Component {
           // error
           this.setState({
             progress: PROGRESS_ERROR,
-            resErr: `Error: ${err.response.data.error ? JSON.parse(err.response.data.error) : 'Unknown Error'}`,
+            resErr: `Error: ${err.response.data.error ? err.response.data.error : 'Unknown Error'}`,
           });
         });
     }
