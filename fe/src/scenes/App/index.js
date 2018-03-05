@@ -12,6 +12,9 @@ const PROGRESS_FETCHING = 2;
 const PROGRESS_DATA_FETCHED = 3;
 const PROGRESS_ERROR = 4;
 
+const be_url_c9 = 'https://dev-testtaskmeapp-g30b00m-l3-d3str0y3r.c9users.io/schedule/upload';
+const be_url_local = 'http://localhost:3001/schedule/upload';
+
 const styles = theme => ({
   root: {
     backgroundColor: theme.palette.background.default,
@@ -53,7 +56,7 @@ class App extends React.Component {
       });
       const fd = new FormData();
       fd.append('schedule', this.state.selectedFile);
-      axios.post('http://localhost:3001/schedule', fd)
+      axios.post(be_url_c9, fd)
         .then((res) => {
           // 200
           this.setState({
