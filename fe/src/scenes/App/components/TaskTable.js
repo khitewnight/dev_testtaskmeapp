@@ -50,7 +50,8 @@ const display = (classes, progress, jobData, resErr) => {
         <Typography
           variant="title"
           color="error"
-        >{resErr}
+        >
+          {resErr}
         </Typography>
       );
     default:
