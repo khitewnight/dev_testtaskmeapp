@@ -22,7 +22,7 @@ const styles = theme => ({
   },
   content: {
     display: 'block',
-    width: '50%',
+    width: '80%',
     overflow: 'hidden',
     paddingTop: '100px',
     textAlign: 'center',
