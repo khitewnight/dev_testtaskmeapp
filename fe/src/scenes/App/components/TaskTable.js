@@ -10,6 +10,9 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 2,
     textAlign: 'left',
   },
+  taskText: {
+    textAlign: 'center',
+  }
 });
 
 const display = (classes, progress, jobData, resErr) => {
@@ -23,12 +26,18 @@ const display = (classes, progress, jobData, resErr) => {
       return JSON.parse(jobData).map((x, i) => (
         <div>
           <Typography variant="title">{i + 1}. {x.trade}</Typography>
-          <Typography variant="subheading">{x.jobTitle}</Typography>
+          <Typography
+          variant="subheading"
+          paragraph
+          >
+            {x.jobTitle}
+          </Typography>
           {x.taskList.map(y =>
             (
               <Typography
                 variant="body1"
                 paragraph
+                className={classes.taskText}
               >
                 {y}
               </Typography>
