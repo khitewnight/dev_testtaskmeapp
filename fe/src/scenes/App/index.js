@@ -12,8 +12,8 @@ const PROGRESS_FETCHING = 2;
 const PROGRESS_DATA_FETCHED = 3;
 const PROGRESS_ERROR = 4;
 
-const be_url_c9 = 'https://dev-testtaskmeapp-g30b00m-l3-d3str0y3r.c9users.io/schedules/upload';
-const be_url_local = 'http://localhost:3001/schedules/upload';
+const BE_URL_C9 = 'https://dev-testtaskmeapp-g30b00m-l3-d3str0y3r.c9users.io/schedules/upload';
+const BE_URL_LOCAL = 'http://localhost:3001/schedules/upload';
 
 const styles = theme => ({
   root: {
@@ -28,7 +28,7 @@ const styles = theme => ({
     textAlign: 'center',
     margin: '0px auto',
   },
-  widgetContainer: {
+  container: {
     width: '30%',
     margin: '0px auto',
     padding: '0px auto',
@@ -56,7 +56,7 @@ class App extends React.Component {
       });
       const fd = new FormData();
       fd.append('schedule', this.state.selectedFile);
-      axios.post(be_url_c9, fd)
+      axios.post(BE_URL_LOCAL, fd)
         .then((res) => {
           // 200
           this.setState({
@@ -80,17 +80,17 @@ class App extends React.Component {
     return (
       <div className={classes.root}>
         <main className={classes.content}>
-          <div className={classes.widgetContainer}>
+          <div className={classes.container}>
             <UploadWidget
               fileSelectHandler={this.fileSelectHandler}
               fileUploadHandler={this.fileUploadHandler}
             />
-            <TaskTable
-              progress={this.state.progress}
-              jobData={this.state.jobData}
-              resErr={this.state.resErr}
-            />
           </div>
+          <TaskTable
+            progress={this.state.progress}
+            jobData={this.state.jobData}
+            resErr={this.state.resErr}
+          />
         </main>
       </div>
     );

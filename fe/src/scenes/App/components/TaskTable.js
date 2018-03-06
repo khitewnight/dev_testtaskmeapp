@@ -8,42 +8,65 @@ import Typography from 'material-ui/Typography';
 const styles = theme => ({
   container: {
     marginTop: theme.spacing.unit * 2,
-    textAlign: 'left',
   },
-  taskText: {
-    textAlign: 'center',
-  }
+  taskItemsContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  taskItem: {
+    flexBasis: '25%',
+    marginTop: '10px',
+  },
 });
 
 const display = (classes, progress, jobData, resErr) => {
   switch (progress) {
     case 1:
-      return <Typography variant="title" color="textSecondary">Nothing to display</Typography>;
+      return (
+        <Typography
+          variant="title"
+          color="textSecondary"
+        >
+        Nothing to display
+        </Typography>
+      );
     case 2:
-      return <Typography variant="title">Loading...</Typography>;
-    case 3:
+      return (
+        <Typography
+          variant="title"
+        >
+        Loading...
+        </Typography>
+      );
+    case 3: {
       // trade, jobTitle, taskList[]
-      return JSON.parse(jobData).map((x, i) => (
-        <div>
+      const tasks = JSON.parse(jobData).map((x, i) => (
+        <div className={classes.taskItem}>
           <Typography variant="title">{i + 1}. {x.trade}</Typography>
           <Typography
-          variant="subheading"
-          paragraph
+            variant="subheading"
+            paragraph
           >
             {x.jobTitle}
           </Typography>
           {x.taskList.map(y =>
-            (
-              <Typography
-                variant="body1"
-                paragraph
-                className={classes.taskText}
-              >
-                {y}
-              </Typography>
-            ))}
+        (
+          <Typography
+            algin="center"
+            variant="body1"
+            paragraph
+          >
+            {y}
+          </Typography>
+        ))}
         </div>
       ));
+      return (
+        <div className={classes.taskItemsContainer}>
+          {tasks}
+        </div>
+      );
+    }
     case 4:
       // error
       return (
