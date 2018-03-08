@@ -7,6 +7,7 @@ import Typography from 'material-ui/Typography';
 import List from 'material-ui/List';
 import Paper from 'material-ui/Paper';
 import Button from 'material-ui/Button';
+import AppBar from 'material-ui/AppBar';
 
 // my components
 import JobItem from './components/JobItem';
@@ -20,6 +21,8 @@ const styles = theme => ({
       width: '900px',
     },
     margin: '0 auto',
+    marginTop: '10px',
+    marginBottom: '10px',
     display: 'flex',
     flexDirection: 'column',
   },
@@ -61,8 +64,8 @@ const JobsView = (props) => {
     classes, jobList, jobTabsCurrent, jobTabsHandleChange,
   } = props;
   return (
-    <div className={classes.root}>
-      <Paper square className={classes.controlsContainer}>
+    <Paper className={classes.root}>
+      <AppBar color="default" className={classes.controlsContainer}>
         <div className={classes.controlsContainerRow1}>
           <div className={classes.controlsFilter}>
             <Button
@@ -85,7 +88,7 @@ const JobsView = (props) => {
             jobTabsHandleChange={jobTabsHandleChange}
           />
         </div>
-      </Paper>
+      </AppBar>
       <Paper square className={classes.jobListContainer}>
         <List className={classes.jobList}>
           {jobList.map(jobObject => (
@@ -94,9 +97,12 @@ const JobsView = (props) => {
           {jobList.map(jobObject => (
             <JobItem key={jobObject.id} {...jobObject} />
           ))}
+          {jobList.map(jobObject => (
+            <JobItem key={jobObject.id} {...jobObject} />
+          ))}
         </List>
       </Paper>
-    </div>
+    </Paper>
   );
 };
 
