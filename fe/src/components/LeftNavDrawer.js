@@ -50,10 +50,7 @@ const LeftNavDrawer = (props) => {
       <div className={classes.toolbar} />
       <Divider />
       <List component="nav">
-        <ListItemLink to="/" primary="Main View" icon={<DeviceHubIcon />} location={location} />
-        <ListItemLink to="/jobs" primary="View Jobs" icon={<InboxIcon />} location={location} />
-        <ListItemLink to="/tasks" primary="View Tasks" icon={<DraftsIcon />} location={location} />
-        <ListItemLink to="/resources" primary="View Resources" icon={<SendIcon />} location={location} />
+        <ListItemLink to="/" primary="View Jobs" icon={<DeviceHubIcon />} location={location} />
       </List>
     </div>
   );

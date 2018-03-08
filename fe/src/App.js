@@ -5,14 +5,17 @@ import { Route, Switch } from 'react-router-dom';
 // material-ui
 import { withStyles } from 'material-ui/styles';
 
+// helpers
+import jobList from './helpers/jobList';
+
 // my components and views
 import TopAppBar from './components/TopAppBar';
+import SubHeaderBar from './components/SubHeaderBar';
 import LeftNavDrawer from './components/LeftNavDrawer';
 import MainView from './scenes/MainView/MainView';
 import JobsView from './scenes/JobsView/JobsView';
 import TasksView from './scenes/TasksView/TasksView';
 import ResourcesView from './scenes/ResourcesView/ResourcesView';
-
 
 const LEFT_NAV_DRAWER_WIDTH = '240px';
 
@@ -20,16 +23,16 @@ const styles = theme => ({
   root: {
     margin: 0,
     padding: 0,
+    height: '100vh',
+    overflow: 'hidden',
+    position: 'relative',
+    display: 'flex',
   },
   mainContainer: {
     marginLeft: LEFT_NAV_DRAWER_WIDTH,
     width: `calc(100% - ${LEFT_NAV_DRAWER_WIDTH})`,
-    minHeight: '100vh',
-    overflow: 'hidden',
-  },
-  contentContainer: {
-    margin: '0 auto',
-    width: '75%',
+    display: 'flex',
+    flexDirection: 'column',
   },
   toolbar: theme.mixins.toolbar,
 });
@@ -37,6 +40,14 @@ const styles = theme => ({
 class App extends React.Component {
   state = {
     isMobile: false,
+    jobList,
+    jobTabsCurrent: 0,
+  };
+
+  jobTabsHandleChange = (event, value) => {
+    this.setState({
+      jobTabsCurrent: value,
+    });
   };
 
   render() {
@@ -56,30 +67,22 @@ class App extends React.Component {
         </header>
         <main className={classes.mainContainer}>
           <div className={classes.toolbar} />
-          <div className={classes.contentContainer}>
-            <Switch>
-              <Route
-                exact
-                path="/"
-                component={MainView}
-              />
-              <Route
-                path="/jobs"
-                component={JobsView}
-              />
-              <Route
-                path="/tasks"
-                component={TasksView}
-              />
-              <Route
-                path="/resources"
-                component={ResourcesView}
-              />
-              <Route
-                render={() => <h1>404</h1>}
-              />
-            </Switch>
-          </div>
+          {/* <SubHeaderBar /> */}
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <JobsView
+                  jobList={this.state.jobList}
+                  jobTabsCurrent={this.state.jobTabsCurrent}
+                  jobTabsHandleChange={this.jobTabsHandleChange}
+                />)}
+            />
+            <Route
+              render={() => <h1>404</h1>}
+            />
+          </Switch>
         </main>
       </div>
     );
