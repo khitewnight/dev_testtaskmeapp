@@ -42,21 +42,27 @@ const display = (classes, progress, jobData, resErr) => {
       // trade, jobTitle, taskList[]
       const tasks = JSON.parse(jobData).map((x, i) => (
         <div className={classes.taskItem}>
-          <Typography variant="title">{i + 1}. {x.trade}</Typography>
           <Typography
+            align="left"
+            variant="title"
+          >
+            {i + 1}. {x.trade}
+          </Typography>
+          <Typography
+            align="left"
             variant="subheading"
             paragraph
           >
             {x.jobTitle}
           </Typography>
-          {x.taskList.map(y =>
+          {x.taskList.map((y, index) =>
         (
           <Typography
             algin="center"
             variant="body1"
             paragraph
           >
-            {y}
+            Day {index + 1}
           </Typography>
         ))}
         </div>

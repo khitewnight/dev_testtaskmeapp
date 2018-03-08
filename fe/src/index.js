@@ -1,32 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+import { BrowserRouter as Router } from 'react-router-dom';
 
-import App from './scenes/App/';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 
+import App from './App';
+
 const theme = createMuiTheme({
   palette: {
-    type: 'dark',
+    type: 'light',
   },
 });
 
 ReactDOM.render(
-  <Router>
-    <MuiThemeProvider theme={theme}>
-      <Switch>
-        <Route exact path="/" component={App} />
-        <Redirect to="/404" />
-      </Switch>
-      <Route
-        exact
-        path="/404"
-        render={() => <h1>404</h1>}
-      />
-    </MuiThemeProvider>
-  </Router>,
+  <MuiThemeProvider theme={theme}>
+    <Router>
+      <App />
+    </Router>
+  </MuiThemeProvider>
+  ,
   document.getElementById('root'),
 );
 
