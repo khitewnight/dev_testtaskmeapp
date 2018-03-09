@@ -33,7 +33,18 @@ const JobsView = (props) => {
   
   return (
     <Paper className={classes.root}>
-      {JSON.stringify(props)}
+      <Switch>
+        <Route
+          exact
+          path={match.url}
+          render={() => ViewJobs}
+        />
+        <Route
+          exact
+          path={`${match.url}/add`}
+          render={() => AddJob}
+        />
+      </Switch>
     </Paper>
   );
 };
@@ -45,16 +56,3 @@ JobsView.propTypes = {
 };
 
 export default withStyles(styles, { withTheme: true })(JobsView);
-
-      // <Switch>
-      //   <Route
-      //     exact
-      //     path={match.url}
-      //     render={() => ViewJobs}
-      //   />
-      //   <Route
-      //     exact
-      //     path={`${match.url}/add`}
-      //     render={() => AddJob}
-      //   />
-      // </Switch>
