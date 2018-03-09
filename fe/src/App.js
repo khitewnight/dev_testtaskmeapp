@@ -82,6 +82,10 @@ class App extends React.Component {
             <Route
               exact
               path="/"
+              <Redirect to={{pathname: "/jobs"}} />
+            />
+            <Route
+              path="/jobs"
               render={() => (
                 <JobsView
                   jobList={this.state.jobListFiltered}
