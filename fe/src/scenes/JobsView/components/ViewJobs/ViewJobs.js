@@ -51,7 +51,7 @@ const ViewJobs = (props) => {
   
   return (
     <div>
-    <AppBar color="default" className={classes.controlsContainer}>
+      <AppBar color="default" className={classes.controlsContainer}>
         <div className={classes.controlsContainerRow1}>
           <div className={classes.controlsFilter}>
             <Button
