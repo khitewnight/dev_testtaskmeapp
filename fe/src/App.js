@@ -74,7 +74,9 @@ class App extends React.Component {
         <main className={classes.mainContainer}>
           <div className={classes.toolbar} />
           {/* <SubHeaderBar /> */}
-          <b>DEBUG:</b> <em>jobTabsCurrent</em> = {this.state.jobTabsCurrent}
+          <span style={{textAlign:'center'}}>
+            <b>DEBUG:</b> <em>jobTabsCurrent</em> = {this.state.jobTabsCurrent}
+          </span>
           <Switch>
             <Route
               exact

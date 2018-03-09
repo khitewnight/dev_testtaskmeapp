@@ -31,7 +31,7 @@ const jobList = [
     trade: 'Building & Civil',
     component: 'Grass-cutting',
     scope: 'Grass-cutting, Monthly',
-    status: jobStatusEnum.NOT_STARTED,
+    status: jobStatusEnum.COMPLETED,
     taskList: [{
       id: '1.1',
       type: 'Escort',
@@ -63,7 +63,7 @@ const jobList = [
     trade: 'Building & Civil',
     component: 'Horticultural (Landscaping)',
     scope: 'Prunning (Tree/Hedges/Shrubs/Groundcovers), Monthly',
-    status: jobStatusEnum.NOT_STARTED,
+    status: jobStatusEnum.IN_PROGRESS,
     taskList: [{
       id: '2.1',
       type: 'Escort',
@@ -93,7 +93,7 @@ const jobList = [
     trade: 'Electrical',
     component: 'Standby Generators & Powerhouses',
     scope: 'Maintenance, Weekly',
-    status: jobStatusEnum.NOT_STARTED,
+    status: jobStatusEnum.COMPLETED,
     taskList: [{
       id: '4.1',
       type: 'Escort',
