@@ -37,12 +37,12 @@ const JobsView = (props) => {
         <Route
           exact
           path={match.url}
-          render={() => ViewJobs}
+          render={() => (<ViewJobs />)}
         />
         <Route
           exact
           path={`${match.url}/add`}
-          render={() => AddJob}
+          render={() => (<AddJob />)}
         />
       </Switch>
     </Paper>

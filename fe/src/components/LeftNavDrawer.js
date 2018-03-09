@@ -1,6 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types'; import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { withRouter, Link } from 'react-router-dom';
 // material-ui
 import { withStyles } from 'material-ui/styles';
 import Drawer from 'material-ui/Drawer';
