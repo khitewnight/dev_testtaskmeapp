@@ -86,12 +86,13 @@ class App extends React.Component {
             />
             <Route
               path="/jobs"
-              render={() => (
+              render={(props) => (
                 <JobsView
                   jobList={this.state.jobListFiltered}
                   jobTabsCurrent={this.state.jobTabsCurrent}
                   jobViewCurrent={this.state.jobViewCurrent}
                   jobTabsHandleChange={this.jobTabsHandleChange}
+                  {...props}
                 />
               )}
             />
