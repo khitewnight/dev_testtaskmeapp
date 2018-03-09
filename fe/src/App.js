@@ -16,7 +16,6 @@ import MainView from './scenes/MainView/MainView';
 import JobsView from './scenes/JobsView/JobsView';
 import TasksView from './scenes/TasksView/TasksView';
 import ResourcesView from './scenes/ResourcesView/ResourcesView';
-import jobViewEnum from './helpers/jobViewEnum';
 
 const LEFT_NAV_DRAWER_WIDTH = '240px';
 
@@ -44,7 +43,6 @@ class App extends React.Component {
     jobList,
     jobListFiltered: jobList,
     jobTabsCurrent: 0,
-    jobViewCurrent: jobViewEnum.ADD_JOB,
   };
 
   jobTabsHandleChange = (event, value) => {
