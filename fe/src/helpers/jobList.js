@@ -1,3 +1,4 @@
+import jobStatusEnum from './jobStatusEnum';
 const job3TaskList = [];
 
 function pad2(n) {
@@ -21,12 +22,16 @@ for (let i = 8, j = 2; i + 2 <= 31; i += 7, j += 3) {
   }
 }
 
+// TODO:
+// add 'createdOn'
+// add 'lastModified'
 const jobList = [
   {
     id: '1',
     trade: 'Building & Civil',
     component: 'Grass-cutting',
     scope: 'Grass-cutting, Monthly',
+    status: jobStatusEnum.NOT_STARTED,
     taskList: [{
       id: '1.1',
       type: 'Escort',
@@ -58,6 +63,7 @@ const jobList = [
     trade: 'Building & Civil',
     component: 'Horticultural (Landscaping)',
     scope: 'Prunning (Tree/Hedges/Shrubs/Groundcovers), Monthly',
+    status: jobStatusEnum.NOT_STARTED,
     taskList: [{
       id: '2.1',
       type: 'Escort',
@@ -79,6 +85,7 @@ const jobList = [
     trade: 'Building & Civil',
     component: 'Cleaning Services',
     scope: 'Office Cleaning, Alternate Day',
+    status: jobStatusEnum.NOT_STARTED,
     taskList: job3TaskList,
   },
   {
@@ -86,6 +93,7 @@ const jobList = [
     trade: 'Electrical',
     component: 'Standby Generators & Powerhouses',
     scope: 'Maintenance, Weekly',
+    status: jobStatusEnum.NOT_STARTED,
     taskList: [{
       id: '4.1',
       type: 'Escort',

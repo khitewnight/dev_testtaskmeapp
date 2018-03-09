@@ -16,6 +16,7 @@ import MainView from './scenes/MainView/MainView';
 import JobsView from './scenes/JobsView/JobsView';
 import TasksView from './scenes/TasksView/TasksView';
 import ResourcesView from './scenes/ResourcesView/ResourcesView';
+import jobStatusEnum from './helpers/jobStatusEnum';
 
 const LEFT_NAV_DRAWER_WIDTH = '240px';
 
@@ -41,12 +42,17 @@ class App extends React.Component {
   state = {
     isMobile: false,
     jobList,
+    jobListFiltered: jobList,
     jobTabsCurrent: 0,
   };
 
   jobTabsHandleChange = (event, value) => {
+    const tempJobListFiltered = (value === jobStatusEnum.ALL)
+                                ? jobList.slice(0) :
+                                  jobList.filter(x => x.status === value);
     this.setState({
       jobTabsCurrent: value,
+      jobListFiltered: tempJobListFiltered,
     });
   };
 
@@ -68,13 +74,14 @@ class App extends React.Component {
         <main className={classes.mainContainer}>
           <div className={classes.toolbar} />
           {/* <SubHeaderBar /> */}
+          <b>DEBUG:</b> <em>jobTabsCurrent</em> = {this.state.jobTabsCurrent}
           <Switch>
             <Route
               exact
               path="/"
               render={() => (
                 <JobsView
-                  jobList={this.state.jobList}
+                  jobList={this.state.jobListFiltered}
                   jobTabsCurrent={this.state.jobTabsCurrent}
                   jobTabsHandleChange={this.jobTabsHandleChange}
                 />)}
