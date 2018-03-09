@@ -16,7 +16,6 @@ import MainView from './scenes/MainView/MainView';
 import JobsView from './scenes/JobsView/JobsView';
 import TasksView from './scenes/TasksView/TasksView';
 import ResourcesView from './scenes/ResourcesView/ResourcesView';
-import jobStatusEnum from './helpers/jobStatusEnum';
 
 const LEFT_NAV_DRAWER_WIDTH = '240px';
 
@@ -47,7 +46,7 @@ class App extends React.Component {
   };
 
   jobTabsHandleChange = (event, value) => {
-    const tempJobListFiltered = (value === jobStatusEnum.ALL)
+    const tempJobListFiltered = (value === 0)
                                 ? jobList.slice(0) :
                                   jobList.filter(x => x.status === value);
     this.setState({
