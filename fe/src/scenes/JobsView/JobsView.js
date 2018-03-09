@@ -28,7 +28,7 @@ const styles = theme => ({
 
 const JobsView = (props) => {
   const {
-    classes, /*jobViewCurrent,*/ match
+    classes, match, jobList, jobTabsCurrent, jobTabsHandleChange
   } = props;
   
   return (
@@ -39,9 +39,9 @@ const JobsView = (props) => {
           path={match.url}
           render={() => (
           <ViewJobs
-            jobList={this.state.jobListFiltered}
-            jobTabsCurrent={this.state.jobTabsCurrent}
-            jobTabsHandleChange={this.jobTabsHandleChange}
+            jobList={jobList}
+            jobTabsCurrent={jobTabsCurrent}
+            jobTabsHandleChange={jobTabsHandleChange}
           />)}
         />
         <Route
@@ -58,6 +58,9 @@ JobsView.propTypes = {
   classes: PropTypes.object.isRequired,
   jobViewCurrent: PropTypes.oneOf(jobViewEnum).isRequired,
   match: PropTypes.object.isRequired,
+  jobList: PropTypes.arrayOf(PropTypes.object).isRequired,
+  jobTabsHandleChange: PropTypes.func.isRequired,
+  jobTabsCurrent: PropTypes.number.isRequired,
 };
 
 export default withStyles(styles, { withTheme: true })(JobsView);
