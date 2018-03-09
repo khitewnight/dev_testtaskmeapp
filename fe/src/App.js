@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 // material-ui
 import { withStyles } from 'material-ui/styles';
@@ -82,7 +82,9 @@ class App extends React.Component {
             <Route
               exact
               path="/"
-              <Redirect to={{pathname: "/jobs"}} />
+              render={() => (
+                <Redirect to="/jobs" />
+              )}
             />
             <Route
               path="/jobs"
@@ -92,7 +94,8 @@ class App extends React.Component {
                   jobTabsCurrent={this.state.jobTabsCurrent}
                   jobViewCurrent={this.state.jobViewCurrent}
                   jobTabsHandleChange={this.jobTabsHandleChange}
-                />)}
+                />
+              )}
             />
             <Route
               render={() => <h1>404</h1>}

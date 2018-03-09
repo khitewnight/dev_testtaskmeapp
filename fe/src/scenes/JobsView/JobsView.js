@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Route, Switch } from 'react-router-dom';
 
 // material-ui
 import { withStyles } from 'material-ui/styles';
@@ -7,6 +8,7 @@ import Paper from 'material-ui/Paper';
 
 // my components
 import ViewJobs from './components/ViewJobs/ViewJobs';
+import AddJob from './components/ViewJobs/AddJob';
 import jobViewEnum from './helpers/jobViewEnum';
 
 const styles = theme => ({
@@ -24,28 +26,25 @@ const styles = theme => ({
   },
 });
 
-const renderJobView = (jobViewCurrent) => {
-  switch(jobViewCurrent) {
-    case jobViewEnum.VIEW_JOBS: {
-      return ViewJobs;
-    }
-    case jobViewEnum.ADD_JOB: {
-      return (<h1>ADD_JOB</h1>);
-    }
-    case jobViewEnum.EDIT_JOB: {
-      return (<h1>EDIT_JOB</h1>);
-    }
-  }
-};
-
 const JobsView = (props) => {
   const {
-    classes, jobViewCurrent
+    classes, /*jobViewCurrent,*/ match
   } = props;
   
   return (
     <Paper className={classes.root}>
-      {renderJobView(jobViewCurrent)}
+      <Switch>
+        <Route
+          exact
+          path={match.url}
+          render={() => ViewJobs}
+        />
+        <Route
+          exact
+          path={`${match.url}/add`}
+          render={() => AddJob}
+        />
+      </Switch>
     </Paper>
   );
 };
@@ -53,6 +52,7 @@ const JobsView = (props) => {
 JobsView.propTypes = {
   classes: PropTypes.object.isRequired,
   jobViewCurrent: PropTypes.oneOf(jobViewEnum).isRequired,
+  match: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles, { withTheme: true })(JobsView);
