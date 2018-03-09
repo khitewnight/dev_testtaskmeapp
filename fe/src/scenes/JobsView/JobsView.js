@@ -8,7 +8,7 @@ import Paper from 'material-ui/Paper';
 
 // my components
 import ViewJobs from './components/ViewJobs/ViewJobs';
-import AddJob from './components/ViewJobs/AddJob';
+import AddJob from './components/AddJob/AddJob';
 import jobViewEnum from './helpers/jobViewEnum';
 
 const styles = theme => ({
