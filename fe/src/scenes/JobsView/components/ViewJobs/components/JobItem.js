@@ -8,7 +8,7 @@ import Typography from 'material-ui/Typography';
 import Paper from 'material-ui/Paper';
 
 // my components and helpers
-import jobStatusEnum from '../../../helpers/jobStatusEnum';
+import jobStatusEnum from '../../../../../helpers/jobStatusEnum';
 
 const styles = theme => ({
   listItem: {
