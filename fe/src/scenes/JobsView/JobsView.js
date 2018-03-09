@@ -10,8 +10,8 @@ import Button from 'material-ui/Button';
 import AppBar from 'material-ui/AppBar';
 
 // my components
-import JobItem from './components/JobItem';
-import JobControlsTabs from './components/JobControlsTabs';
+import ViewJobs from './components/ViewJobs/ViewJobs';
+import jobViewEnum from './helpers/jobViewEnum';
 
 const styles = theme => ({
   root: {
@@ -26,91 +26,37 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
   },
-  jobList: {
-    margin: '0 auto',
-    width: '80%',
-  },
-  jobListContainer: {
-    overflowX: 'hidden',
-    overflowY: 'hidden',
-    '&:hover': {
-      overflowY: 'overlay',
-    },
-    flex: '8',
-  },
-  controlsContainer: {
-    flex: '1',
-    padding: '5px',
-    paddingLeft: '15px',
-    paddingRight: '15px',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    zIndex: '2',
-    position: 'relative',
-  },
-  controlsContainerRow1: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-  controlsTabs: {
-    display: 'flex',
-    justifyContent: 'space-around',
-  },
 });
+
+const renderJobView = (jobViewCurrent) => {
+  switch(jobViewCurrent) {
+    case jobViewEnum.VIEW_JOBS: {
+      return ViewJobs;
+    }
+    case jobViewEnum.ADD_JOB: {
+      return (<h1>ADD_JOB</h1>);
+    }
+    case jobViewEnum.EDIT_JOB: {
+      return (<h1>EDIT_JOB</h1>);
+    }
+  }
+};
 
 const JobsView = (props) => {
   const {
-    classes, jobList, jobTabsCurrent, jobTabsHandleChange,
+    classes, jobViewCurrent
   } = props;
+  
   return (
     <Paper className={classes.root}>
-      <AppBar color="default" className={classes.controlsContainer}>
-        <div className={classes.controlsContainerRow1}>
-          <div className={classes.controlsFilter}>
-            <Button
-              color="primary"
-            >
-            Filter Options
-            </Button>
-          </div>
-          <div className={classes.controlsAddJob}>
-            <Button
-              color="primary"
-            >
-            Add New Job
-            </Button>
-          </div>
-        </div>
-        <div className={classes.controlsTabs}>
-          <JobControlsTabs
-            jobTabsCurrent={jobTabsCurrent}
-            jobTabsHandleChange={jobTabsHandleChange}
-          />
-        </div>
-      </AppBar>
-      <Paper square className={classes.jobListContainer}>
-        <List className={classes.jobList}>
-          {jobList.map(jobObject => (
-            <JobItem key={jobObject.id} {...jobObject} />
-          ))}
-          {jobList.map(jobObject => (
-            <JobItem key={jobObject.id} {...jobObject} />
-          ))}
-          {jobList.map(jobObject => (
-            <JobItem key={jobObject.id} {...jobObject} />
-          ))}
-        </List>
-      </Paper>
+      {renderJobView(jobViewCurrent)}
     </Paper>
   );
 };
 
 JobsView.propTypes = {
   classes: PropTypes.object.isRequired,
-  jobList: PropTypes.arrayOf(PropTypes.object).isRequired,
-  jobTabsHandleChange: PropTypes.func.isRequired,
-  jobTabsCurrent: PropTypes.number.isRequired,
+  jobViewCurrent: PropTypes.oneOf(jobViewEnum).isRequired,
 };
 
 export default withStyles(styles, { withTheme: true })(JobsView);
