@@ -44,7 +44,7 @@ class App extends React.Component {
     jobList,
     jobListFiltered: jobList,
     jobTabsCurrent: 0,
-    jobViewCurrent: jobViewEnum.VIEW_JOBS,
+    jobViewCurrent: jobViewEnum.ADD_JOB,
   };
 
   jobTabsHandleChange = (event, value) => {

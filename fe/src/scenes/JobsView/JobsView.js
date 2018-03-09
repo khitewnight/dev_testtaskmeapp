@@ -1,13 +1,8 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
 // material-ui
 import { withStyles } from 'material-ui/styles';
-import Typography from 'material-ui/Typography';
-import List from 'material-ui/List';
 import Paper from 'material-ui/Paper';
-import Button from 'material-ui/Button';
-import AppBar from 'material-ui/AppBar';
 
 // my components
 import ViewJobs from './components/ViewJobs/ViewJobs';
