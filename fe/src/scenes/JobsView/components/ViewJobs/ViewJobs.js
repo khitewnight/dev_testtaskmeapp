@@ -50,7 +50,7 @@ const ViewJobs = (props) => {
   const { classes, jobList, jobTabsCurrent, jobTabsHandleChange } = props;
   
   return (
-    <div style={{flex:'1'}}>
+    <div style={{flex:'1', display:'flex', flexDirection:'column'}}>
       <AppBar color="default" className={classes.controlsContainer}>
         <div className={classes.controlsContainerRow1}>
           <div className={classes.controlsFilter}>
