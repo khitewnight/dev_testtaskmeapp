@@ -90,7 +90,6 @@ class App extends React.Component {
                 <JobsView
                   jobList={this.state.jobListFiltered}
                   jobTabsCurrent={this.state.jobTabsCurrent}
-                  jobViewCurrent={this.state.jobViewCurrent}
                   jobTabsHandleChange={this.jobTabsHandleChange}
                   {...props}
                 />

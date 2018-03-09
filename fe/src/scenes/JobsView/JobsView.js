@@ -37,7 +37,12 @@ const JobsView = (props) => {
         <Route
           exact
           path={match.url}
-          render={() => (<ViewJobs />)}
+          render={() => (
+          <ViewJobs
+            jobList={this.state.jobListFiltered}
+            jobTabsCurrent={this.state.jobTabsCurrent}
+            jobTabsHandleChange={this.jobTabsHandleChange}
+          />)}
         />
         <Route
           exact
