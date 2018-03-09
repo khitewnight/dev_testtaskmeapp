@@ -47,8 +47,8 @@ class App extends React.Component {
 
   jobTabsHandleChange = (event, value) => {
     const tempJobListFiltered = (value === 0)
-                                ? jobList.slice(0) :
-                                  jobList.filter(x => x.status === value);
+      ? jobList.slice(0) :
+      jobList.filter(x => x.status === value);
     this.setState({
       jobTabsCurrent: value,
       jobListFiltered: tempJobListFiltered,
@@ -73,9 +73,6 @@ class App extends React.Component {
         <main className={classes.mainContainer}>
           <div className={classes.toolbar} />
           {/* <SubHeaderBar /> */}
-          <span style={{textAlign:'center'}}>
-            <b>DEBUG:</b> <em>jobTabsCurrent</em> = {this.state.jobTabsCurrent}
-          </span>
           <Switch>
             <Route
               exact
@@ -86,7 +83,7 @@ class App extends React.Component {
             />
             <Route
               path="/jobs"
-              render={(props) => (
+              render={props => (
                 <JobsView
                   jobList={this.state.jobListFiltered}
                   jobTabsCurrent={this.state.jobTabsCurrent}

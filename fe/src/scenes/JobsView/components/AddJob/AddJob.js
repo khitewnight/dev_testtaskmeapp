@@ -10,15 +10,14 @@ const styles = theme => ({
   root: {},
 });
 
-const AddJob = props => {
+const AddJob = (props) => {
   const { classes } = props;
-  
   return (
     <h1>ADD_JOB</h1>
   );
 };
 
-AddJob.propTypes ={
+AddJob.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 

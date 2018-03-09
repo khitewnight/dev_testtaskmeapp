@@ -1,4 +1,5 @@
 import jobStatusEnum from './jobStatusEnum';
+
 const job3TaskList = [];
 
 function pad2(n) {

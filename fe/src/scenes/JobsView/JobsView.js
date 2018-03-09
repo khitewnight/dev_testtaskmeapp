@@ -9,7 +9,6 @@ import Paper from 'material-ui/Paper';
 // my components
 import ViewJobs from './components/ViewJobs/ViewJobs';
 import AddJob from './components/AddJob/AddJob';
-import jobViewEnum from './helpers/jobViewEnum';
 
 const styles = theme => ({
   root: {
@@ -28,9 +27,9 @@ const styles = theme => ({
 
 const JobsView = (props) => {
   const {
-    classes, match, jobList, jobTabsCurrent, jobTabsHandleChange
+    classes, match, jobList, jobTabsCurrent, jobTabsHandleChange,
   } = props;
-  
+
   return (
     <Paper className={classes.root}>
       <Switch>
@@ -38,11 +37,12 @@ const JobsView = (props) => {
           exact
           path={match.url}
           render={() => (
-          <ViewJobs
-            jobList={jobList}
-            jobTabsCurrent={jobTabsCurrent}
-            jobTabsHandleChange={jobTabsHandleChange}
-          />)}
+            <ViewJobs
+              match={match}
+              jobList={jobList}
+              jobTabsCurrent={jobTabsCurrent}
+              jobTabsHandleChange={jobTabsHandleChange}
+            />)}
         />
         <Route
           exact
@@ -56,7 +56,6 @@ const JobsView = (props) => {
 
 JobsView.propTypes = {
   classes: PropTypes.object.isRequired,
-  jobViewCurrent: PropTypes.oneOf(jobViewEnum).isRequired,
   match: PropTypes.object.isRequired,
   jobList: PropTypes.arrayOf(PropTypes.object).isRequired,
   jobTabsHandleChange: PropTypes.func.isRequired,

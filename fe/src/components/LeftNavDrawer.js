@@ -8,9 +8,6 @@ import List, { ListItem, ListItemText, ListItemIcon } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 
 // material-ui icons
-import InboxIcon from 'material-ui-icons/MoveToInbox';
-import DraftsIcon from 'material-ui-icons/Drafts';
-import SendIcon from 'material-ui-icons/Send';
 import DeviceHubIcon from 'material-ui-icons/DeviceHub';
 
 const styles = theme => ({
@@ -23,7 +20,7 @@ const ListItemLink = (props) => {
   } = props;
 
   return (
-    <li style={(to === location.pathname) ? { backgroundColor: '#E0E0E0' } : {}}>
+    <li style={(location.pathname.indexOf(to) === 0) ? { backgroundColor: '#E0E0E0' } : {}}>
       <ListItem
         button
         component={Link}
@@ -50,7 +47,7 @@ const LeftNavDrawer = (props) => {
       <div className={classes.toolbar} />
       <Divider />
       <List component="nav">
-        <ListItemLink to="/" primary="View Jobs" icon={<DeviceHubIcon />} location={location} />
+        <ListItemLink to="/jobs" primary="View Jobs" icon={<DeviceHubIcon />} location={location} />
       </List>
     </div>
   );

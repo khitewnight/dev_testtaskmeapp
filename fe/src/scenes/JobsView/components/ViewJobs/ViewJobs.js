@@ -10,9 +10,14 @@ import AppBar from 'material-ui/AppBar';
 
 // my components
 import JobItem from './components/JobItem';
-import JobControlsTabs from './components/JobControlsTabs';
+import JobControls from './components/JobControls';
 
-const styles = (theme) => ({
+const styles = theme => ({
+  root: {
+    flex: '1',
+    display: 'flex',
+    flexDirection: 'column',
+  },
   jobList: {
     margin: '0 auto',
     width: '80%',
@@ -25,56 +30,20 @@ const styles = (theme) => ({
     },
     flex: '8',
   },
-  controlsContainer: {
-    flex: '1',
-    padding: '5px',
-    paddingLeft: '15px',
-    paddingRight: '15px',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    zIndex: '2',
-    position: 'relative',
-  },
-  controlsContainerRow1: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-  controlsTabs: {
-    display: 'flex',
-    justifyContent: 'space-around',
-  },
 });
 
 const ViewJobs = (props) => {
-  const { classes, jobList, jobTabsCurrent, jobTabsHandleChange } = props;
-  
+  const {
+    classes, jobList, jobTabsCurrent, jobTabsHandleChange, match,
+  } = props;
+
   return (
-    <div style={{flex:'1', display:'flex', flexDirection:'column'}}>
-      <AppBar color="default" className={classes.controlsContainer}>
-        <div className={classes.controlsContainerRow1}>
-          <div className={classes.controlsFilter}>
-            <Button
-              color="primary"
-            >
-            Filter Options
-            </Button>
-          </div>
-          <div className={classes.controlsAddJob}>
-            <Button
-              color="primary"
-            >
-            Add New Job
-            </Button>
-          </div>
-        </div>
-        <div className={classes.controlsTabs}>
-          <JobControlsTabs
-            jobTabsCurrent={jobTabsCurrent}
-            jobTabsHandleChange={jobTabsHandleChange}
-          />
-        </div>
-      </AppBar>
+    <div className={classes.root}>
+      <JobControls
+        match={match}
+        jobTabsCurrent={jobTabsCurrent}
+        jobTabsHandleChange={jobTabsHandleChange}
+      />
       <Paper square className={classes.jobListContainer}>
         <List className={classes.jobList}>
           {jobList.map(jobObject => (
@@ -93,6 +62,7 @@ const ViewJobs = (props) => {
 };
 
 ViewJobs.propTypes = {
+  match: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
   jobList: PropTypes.arrayOf(PropTypes.object).isRequired,
   jobTabsHandleChange: PropTypes.func.isRequired,

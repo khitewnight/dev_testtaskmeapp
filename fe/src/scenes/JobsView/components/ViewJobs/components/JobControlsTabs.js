@@ -6,8 +6,9 @@ import { withStyles } from 'material-ui/styles';
 import Tabs, { Tab } from 'material-ui/Tabs';
 
 const styles = theme => ({
-  root: {
-    flexGrow: 1,
+  controlsTabs: {
+    display: 'flex',
+    justifyContent: 'space-around',
   },
 });
 
@@ -16,7 +17,7 @@ const JobControlsTabs = (props) => {
     classes, jobTabsHandleChange, jobTabsCurrent,
   } = props;
   return (
-    <div className={classes.root}>
+    <div className={classes.controlsTabs}>
       <Tabs
         value={jobTabsCurrent}
         onChange={jobTabsHandleChange}
