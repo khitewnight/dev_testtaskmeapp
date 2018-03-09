@@ -33,7 +33,7 @@ const JobsView = (props) => {
   
   return (
     <Paper className={classes.root}>
-      JSON.stringify(props);
+      {JSON.stringify(props)}
     </Paper>
   );
 };
