@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
 // material-ui
 import { withStyles } from 'material-ui/styles';
@@ -9,11 +8,11 @@ import Button from 'material-ui/Button';
 
 // my components
 import JobControlsTabs from './JobControlsTabs';
+import ButtonLink from '../../ButtonLink';
 
 const styles = theme => ({
   controlsContainer: {
     minHeight: '125px',
-    flex: '1',
     padding: '5px',
     paddingLeft: '15px',
     paddingRight: '15px',
@@ -28,27 +27,6 @@ const styles = theme => ({
     justifyContent: 'space-between',
   },
 });
-
-const ButtonLink = (props) => {
-  const {
-    color, to, text,
-  } = props;
-  return (
-    <Button
-      component={Link}
-      color={color}
-      to={to}
-    >
-      {text}
-    </Button>
-  );
-};
-
-ButtonLink.propTypes = {
-  color: PropTypes.object.isRequired,
-  to: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
-};
 
 const JobControlsRow1 = (props) => {
   const { classes, match } = props;

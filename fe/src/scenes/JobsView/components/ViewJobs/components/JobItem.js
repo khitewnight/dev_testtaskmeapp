@@ -43,7 +43,8 @@ JobItem.propTypes = {
   id: PropTypes.string.isRequired,
   trade: PropTypes.string.isRequired,
   component: PropTypes.string.isRequired,
-  scope: PropTypes.oneOf(jobStatusEnum).isRequired,
+  scope: PropTypes.string.isRequired,
+  status: PropTypes.oneOf(Object.values(jobStatusEnum)).isRequired,
 };
 
 export default withStyles(styles, { withTheme: true })(JobItem);

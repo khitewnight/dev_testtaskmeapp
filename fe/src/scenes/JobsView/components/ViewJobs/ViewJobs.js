@@ -28,7 +28,7 @@ const styles = theme => ({
     '&:hover': {
       overflowY: 'overlay',
     },
-    flex: '8',
+    flex: '1',
   },
 });
 

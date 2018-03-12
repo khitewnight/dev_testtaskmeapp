@@ -39,16 +39,15 @@ const styles = theme => ({
 
 class App extends React.Component {
   state = {
-    isMobile: false,
     jobList,
     jobListFiltered: jobList,
-    jobTabsCurrent: 0,
+    jobTabsCurrent: 0, // 'ALL' tab
   };
 
   jobTabsHandleChange = (event, value) => {
     const tempJobListFiltered = (value === 0)
-      ? jobList.slice(0) :
-      jobList.filter(x => x.status === value);
+      ? this.state.jobList.slice(0) :
+      this.state.jobList.filter(x => x.status === value);
     this.setState({
       jobTabsCurrent: value,
       jobListFiltered: tempJobListFiltered,

@@ -9,6 +9,7 @@ import Paper from 'material-ui/Paper';
 // my components
 import ViewJobs from './components/ViewJobs/ViewJobs';
 import AddJob from './components/AddJob/AddJob';
+import jobAddFormRenderEnum from './helpers/jobAddFormRenderEnum';
 
 const styles = theme => ({
   root: {
@@ -27,7 +28,13 @@ const styles = theme => ({
 
 const JobsView = (props) => {
   const {
-    classes, match, jobList, jobTabsCurrent, jobTabsHandleChange,
+    classes,
+    match,
+    jobList,
+    jobTabsCurrent,
+    jobTabsHandleChange,
+    jobAddSelectedForm,
+    selectHandleChange,
   } = props;
 
   return (
@@ -42,12 +49,15 @@ const JobsView = (props) => {
               jobList={jobList}
               jobTabsCurrent={jobTabsCurrent}
               jobTabsHandleChange={jobTabsHandleChange}
-            />)}
+            />
+          )}
         />
         <Route
           exact
           path={`${match.url}/add`}
-          render={() => (<AddJob />)}
+          render={() => (
+            <AddJob />
+          )}
         />
       </Switch>
     </Paper>
