@@ -63,27 +63,51 @@ IconButtonLink.propTypes = {
   icon: PropTypes.object.isRequired,
 };
 
+const controlsRow1Button = (props) => {
+  const { classes, jobAddStage, returnToStage1 } = props;
+  switch (jobAddStage) {
+    case 0:
+      return (
+        <IconButtonLink
+          classes={classes}
+          color="primary"
+          to="/jobs"
+          icon={<ArrowBackIcon />}
+        />
+      );
+    case 1:
+      return (
+        <IconButton
+          color="primary"
+          onClick={returnToStage1}
+        >
+          {<ArrowBackIcon />}
+        </IconButton>
+      );
+    default:
+      return 'invalid';
+  }
+};
+
 const ControlsRow1 = (props) => {
-  const { classes, selectedForm, selectHandleChange } = props;
+  const {
+    classes, selectedForm, selectHandleChange, jobAddStage, returnToStage1,
+  } = props;
   return (
     <div className={classes.controlsRow1}>
-      <IconButtonLink
-        classes={classes}
-        color="primary"
-        to="/jobs"
-        icon={<ArrowBackIcon />}
-      />
-      <FormControl className={classes.FormControl}>
-        <InputLabel>Type</InputLabel>
-        <Select
-          value={selectedForm}
-          onChange={selectHandleChange}
-          name="selectedForm"
-        >
-          <MenuItem value={0}>Adhoc</MenuItem>
-          <MenuItem value={1}>MMWS</MenuItem>
-        </Select>
-      </FormControl>
+      {controlsRow1Button(props)}
+      {(jobAddStage === 0) ?
+        <FormControl className={classes.FormControl}>
+          <InputLabel>Type</InputLabel>
+          <Select
+            value={selectedForm}
+            onChange={selectHandleChange}
+            name="selectedForm"
+          >
+            <MenuItem value={0}>Adhoc</MenuItem>
+            <MenuItem value={1}>MMWS</MenuItem>
+          </Select>
+        </FormControl> : ''}
     </div>
   );
 };
@@ -92,10 +116,23 @@ ControlsRow1.propTypes = {
   classes: PropTypes.object.isRequired,
   selectedForm: PropTypes.oneOf(Object.values(jobAddFormRenderEnum)).isRequired,
   selectHandleChange: PropTypes.func.isRequired,
+  jobAddStage: PropTypes.number.isRequired,
+  returnToStage1: PropTypes.func.isRequired,
+};
+
+const controlRows2Text = (jobAddStage) => {
+  switch (jobAddStage) {
+    case 0:
+      return 'Add New Job';
+    case 1:
+      return 'Confirm Job Add';
+    default:
+      return 'invalid';
+  }
 };
 
 const ControlsRow2 = (props) => {
-  const { classes } = props;
+  const { classes, jobAddStage } = props;
   return (
     <div className={classes.controlsRow2}>
       <Typography
@@ -103,7 +140,7 @@ const ControlsRow2 = (props) => {
         align="center"
         variant="title"
       >
-        Add New Job
+        {controlRows2Text(jobAddStage)}
       </Typography>
     </div>
   );
@@ -111,20 +148,23 @@ const ControlsRow2 = (props) => {
 
 ControlsRow2.propTypes = {
   classes: PropTypes.object.isRequired,
+  jobAddStage: PropTypes.number.isRequired,
 };
 
 const ControlsArea = (props) => {
   const {
-    classes, selectedForm, selectHandleChange,
+    classes, selectedForm, selectHandleChange, jobAddStage, returnToStage1,
   } = props;
   return (
     <AppBar color="default" className={classes.controlsArea}>
       <ControlsRow1
+        returnToStage1={returnToStage1}
+        jobAddStage={jobAddStage}
         classes={classes}
         selectedForm={selectedForm}
         selectHandleChange={selectHandleChange}
       />
-      <ControlsRow2 classes={classes} />
+      <ControlsRow2 classes={classes} jobAddStage={jobAddStage} />
     </AppBar>
   );
 };
@@ -133,6 +173,8 @@ ControlsArea.propTypes = {
   classes: PropTypes.object.isRequired,
   selectedForm: PropTypes.oneOf(Object.values(jobAddFormRenderEnum)).isRequired,
   selectHandleChange: PropTypes.func.isRequired,
+  jobAddStage: PropTypes.number.isRequired,
+  returnToStage1: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles, { withTheme: true })(ControlsArea);

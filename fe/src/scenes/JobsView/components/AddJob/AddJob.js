@@ -4,13 +4,15 @@ import PropTypes from 'prop-types';
 // material-ui
 import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
+import Snackbar from 'material-ui/Snackbar';
+import Typography from 'material-ui/Typography';
 
 // my components
 import ControlsArea from './components/ControlsArea';
 import SubmitArea from './components/SubmitArea';
 import FormArea from './components/FormArea';
 import jobAddFormRenderEnum from '../../helpers/jobAddFormRenderEnum';
-
+import FormStage2 from './components/FormStage2';
 
 const styles = theme => ({
   root: {
@@ -25,7 +27,7 @@ const styles = theme => ({
   },
 });
 
-let jobToAdd;
+let jobsToAdd;
 
 class AddJob extends React.Component {
   state = {
@@ -34,7 +36,9 @@ class AddJob extends React.Component {
     trade: '',
     component: '',
     scope: '',
-    jobToAdd,
+    alertFieldsUnfilledOpen: false,
+    jobsToAdd: [],
+    addJobStage: 0,
   };
 
   mmwsTabsHandleChange = (event, value) => {
@@ -55,34 +59,62 @@ class AddJob extends React.Component {
     });
   };
 
+  returnToStage1 = () => {
+    this.setState({
+      jobsToAdd: [],
+      addJobStage: 0,
+    });
+  };
+
   handleSubmit = jobType => async (event) => {
     event.preventDefault();
     switch (jobType) {
       case jobAddFormRenderEnum.FORM_MMWS: {
-        await this.setState({
-          jobToAdd: {
-            type: 'mmws',
-            trade: this.state.trade,
-            component: this.state.component,
-            scope: this.state.scope,
-          },
-        });
+        switch (this.state.mmwsTab) {
+          case 0:
+            if (!this.state.trade || !this.state.component || !this.state.scope) {
+              this.setState({ alertFieldsUnfilledOpen: true });
+              break;
+            }
+            await this.setState(prevState => ({
+              jobsToAdd: [
+                ...prevState.jobsToAdd,
+                {
+                  type: 'mmws',
+                  trade: this.state.trade,
+                  component: this.state.component,
+                  scope: this.state.scope,
+                },
+              ],
+              addJobStage: 1,
+            }));
+            break;
+          case 1:
+            // check if file uploaded
+            break;
+          default:
+        }
         break;
       }
       case jobAddFormRenderEnum.FORM_ADHOC: {
-        await this.setState({
-          jobToAdd: {
-            type: 'adhoc',
-            trade: this.state.trade,
-            component: this.state.component,
-            scope: this.state.scope,
-          },
-        });
+        if (!this.state.trade || !this.state.component || !this.state.scope) {
+          break;
+        }
+        await this.setState(prevState => ({
+          jobsToAdd: [
+            ...prevState.jobsToAdd,
+            {
+              type: 'adhoc',
+              trade: this.state.trade,
+              component: this.state.component,
+              scope: this.state.scope,
+            },
+          ],
+        }));
         break;
       }
       default:
     }
-    console.log(`CONTENT: ${JSON.stringify(this.state.jobToAdd)}`);
   };
 
   render() {
@@ -90,11 +122,13 @@ class AddJob extends React.Component {
       classes,
     } = this.props;
 
-    return (
+    const addJobStage1 = () => (
       <div className={classes.root}>
         <ControlsArea
+          returnToStage1={this.returnToStage1}
           selectedForm={this.state.selectedForm}
           selectHandleChange={this.selectHandleChange}
+          jobAddStage={0}
         />
         <Paper
           square
@@ -113,6 +147,44 @@ class AddJob extends React.Component {
             <SubmitArea />
           </form>
         </Paper>
+      </div>
+    );
+
+    const addJobStage2 = () => (
+      <div className={classes.root}>
+        <ControlsArea
+          returnToStage1={this.returnToStage1}
+          selectedForm={this.state.selectedForm}
+          selectHandleChange={this.selectHandleChange}
+          jobAddStage={1}
+        />
+        <FormStage2
+          jobsToAdd={this.state.jobsToAdd}
+        />
+
+      </div>
+    );
+
+    const renderAddJobStage = (addJobStage) => {
+      switch (addJobStage) {
+        case 0:
+          return addJobStage1();
+        case 1:
+          return addJobStage2();
+        default:
+          return 'invalid';
+      }
+    };
+
+    return (
+      <div className={classes.root}>
+        <Snackbar
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+          open={this.state.alertFieldsUnfilledOpen}
+          onClose={() => this.setState({ alertFieldsUnfilledOpen: false })}
+          message={<Typography variant="subheading" color="error">All input fields must be filled!</Typography>}
+        />
+        {renderAddJobStage(this.state.addJobStage)}
       </div>
     );
   }

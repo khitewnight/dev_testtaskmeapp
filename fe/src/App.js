@@ -71,7 +71,6 @@ class App extends React.Component {
         </header>
         <main className={classes.mainContainer}>
           <div className={classes.toolbar} />
-          {/* <SubHeaderBar /> */}
           <Switch>
             <Route
               exact
