@@ -1,3 +1,10 @@
+#intellij idea
+.idea
+.iml
+
+#vscode
+.vscode
+
 # Logs
 logs
 *.log

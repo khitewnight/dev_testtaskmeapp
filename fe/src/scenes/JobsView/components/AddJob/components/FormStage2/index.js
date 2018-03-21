@@ -34,7 +34,7 @@ const FormMmws = (props) => {
     <Paper square className={classes.stage2Root}>
       <List className={classes.jobList}>
         {jobsToAdd.map(jobObject => (
-          <JobItem {...jobObject} />
+          <JobItem key={jobObject.id} {...jobObject} />
         ))}
       </List>
     </Paper>

@@ -44,6 +44,16 @@ class App extends React.Component {
     jobTabsCurrent: 0, // 'ALL' tab
   };
 
+  /*
+  * validates and adds the passed in job object array
+  * to jobList
+  */
+  confirmJobListAddHandler = (jobListToAdd) => {
+    this.setState(prevState => ({
+      jobList: [...prevState.jobList, ...jobListToAdd],
+    }));
+  };
+
   jobTabsHandleChange = (event, value) => {
     const tempJobListFiltered = (value === 0)
       ? this.state.jobList.slice(0) :
@@ -53,6 +63,8 @@ class App extends React.Component {
       jobListFiltered: tempJobListFiltered,
     });
   };
+
+
 
   render() {
     const { classes } = this.props;
@@ -86,6 +98,7 @@ class App extends React.Component {
                   jobList={this.state.jobListFiltered}
                   jobTabsCurrent={this.state.jobTabsCurrent}
                   jobTabsHandleChange={this.jobTabsHandleChange}
+                  confirmJobListAddHandler={this.confirmJobListAddHandler}
                   {...props}
                 />
               )}

@@ -32,34 +32,34 @@ const styles = theme => ({
   },
 });
 
-const ViewJobs = (props) => {
-  const {
-    classes, jobList, jobTabsCurrent, jobTabsHandleChange, match,
-  } = props;
+class ViewJobs extends React.Component {
+  componentDidMount() {
+    this.props.jobTabsHandleChange(null, this.props.jobTabsCurrent);
+  }
 
-  return (
-    <div className={classes.root}>
-      <JobControls
-        match={match}
-        jobTabsCurrent={jobTabsCurrent}
-        jobTabsHandleChange={jobTabsHandleChange}
-      />
-      <Paper square className={classes.jobListContainer}>
-        <List className={classes.jobList}>
-          {jobList.map(jobObject => (
-            <JobItem key={jobObject.id} {...jobObject} />
+  render() {
+    const {
+      classes, jobList, jobTabsCurrent, jobTabsHandleChange, match,
+    } = this.props;
+
+    return (
+      <div className={classes.root}>
+        <JobControls
+          match={match}
+          jobTabsCurrent={jobTabsCurrent}
+          jobTabsHandleChange={jobTabsHandleChange}
+        />
+        <Paper square className={classes.jobListContainer}>
+          <List className={classes.jobList}>
+            {jobList.map(jobObject => (
+              <JobItem key={jobObject.id} {...jobObject} />
           ))}
-          {jobList.map(jobObject => (
-            <JobItem key={jobObject.id} {...jobObject} />
-          ))}
-          {jobList.map(jobObject => (
-            <JobItem key={jobObject.id} {...jobObject} />
-          ))}
-        </List>
-      </Paper>
-    </div>
-  );
-};
+          </List>
+        </Paper>
+      </div>
+    );
+  }
+}
 
 ViewJobs.propTypes = {
   match: PropTypes.object.isRequired,

@@ -7,8 +7,8 @@ import AppBar from 'material-ui/AppBar';
 import Button from 'material-ui/Button';
 
 // my components
+import ButtonLink from 'scenes/JobsView/components/ButtonLink';
 import JobControlsTabs from './JobControlsTabs';
-import ButtonLink from '../../ButtonLink';
 
 const styles = theme => ({
   controlsContainer: {

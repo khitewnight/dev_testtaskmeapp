@@ -7,5 +7,12 @@
 		"react/forbid-prop-types": 0,
 		"no-unused-vars": 0
 	},
+	"settings": {
+		"import/resolver": {
+			"node": {
+				"moduleDirectory": ["node_modules", "src/"]
+			}
+		}
+	},
 	"parser": "babel-eslint"
 }

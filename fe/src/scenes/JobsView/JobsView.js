@@ -34,8 +34,7 @@ const JobsView = (props) => {
     jobList,
     jobTabsCurrent,
     jobTabsHandleChange,
-    jobAddSelectedForm,
-    selectHandleChange,
+    confirmJobListAddHandler,
   } = props;
 
   return (
@@ -57,7 +56,9 @@ const JobsView = (props) => {
           exact
           path={`${match.url}/add`}
           render={() => (
-            <AddJob />
+            <AddJob
+              confirmJobListAddHandler={confirmJobListAddHandler}
+            />
           )}
         />
       </Switch>
@@ -71,6 +72,7 @@ JobsView.propTypes = {
   jobList: PropTypes.arrayOf(PropTypes.object).isRequired,
   jobTabsHandleChange: PropTypes.func.isRequired,
   jobTabsCurrent: PropTypes.number.isRequired,
+  confirmJobListAddHandler: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles, { withTheme: true })(JobsView);

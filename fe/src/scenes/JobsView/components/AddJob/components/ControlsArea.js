@@ -8,7 +8,7 @@ import AppBar from 'material-ui/AppBar';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import ArrowBackIcon from 'material-ui-icons/ArrowBack';
-import Input, { InputLabel } from 'material-ui/Input';
+import { InputLabel } from 'material-ui/Input';
 import { MenuItem } from 'material-ui/Menu';
 import { FormControl, FormHelperText } from 'material-ui/Form';
 import Select from 'material-ui/Select';
@@ -63,53 +63,59 @@ IconButtonLink.propTypes = {
   icon: PropTypes.object.isRequired,
 };
 
-const controlsRow1Button = (props) => {
-  const { classes, jobAddStage, returnToStage1 } = props;
+const ControlsRow1 = (props) => {
+  const {
+    classes,
+    selectedForm,
+    selectHandleChange,
+    jobAddStage,
+    returnToStage1,
+    confirmJobListAddOnClick,
+  } = props;
+
   switch (jobAddStage) {
     case 0:
       return (
-        <IconButtonLink
-          classes={classes}
-          color="primary"
-          to="/jobs"
-          icon={<ArrowBackIcon />}
-        />
+        <div className={classes.controlsRow1}>
+          <IconButtonLink
+            classes={classes}
+            color="primary"
+            to="/jobs"
+            icon={<ArrowBackIcon />}
+          />
+          <FormControl className={classes.FormControl}>
+            <InputLabel>Type</InputLabel>
+            <Select
+              value={selectedForm}
+              onChange={selectHandleChange}
+              name="selectedForm"
+            >
+              <MenuItem value={0}>Adhoc</MenuItem>
+              <MenuItem value={1}>MMWS</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
       );
     case 1:
       return (
-        <IconButton
-          color="primary"
-          onClick={returnToStage1}
-        >
-          {<ArrowBackIcon />}
-        </IconButton>
+        <div className={classes.controlsRow1}>
+          <IconButton
+            color="primary"
+            onClick={returnToStage1}
+          >
+            {<ArrowBackIcon />}
+          </IconButton>
+          <Button
+            color="primary"
+            onClick={confirmJobListAddOnClick}
+          >
+            Confirm Add
+          </Button>
+        </div>
       );
     default:
       return 'invalid';
   }
-};
-
-const ControlsRow1 = (props) => {
-  const {
-    classes, selectedForm, selectHandleChange, jobAddStage, returnToStage1,
-  } = props;
-  return (
-    <div className={classes.controlsRow1}>
-      {controlsRow1Button(props)}
-      {(jobAddStage === 0) ?
-        <FormControl className={classes.FormControl}>
-          <InputLabel>Type</InputLabel>
-          <Select
-            value={selectedForm}
-            onChange={selectHandleChange}
-            name="selectedForm"
-          >
-            <MenuItem value={0}>Adhoc</MenuItem>
-            <MenuItem value={1}>MMWS</MenuItem>
-          </Select>
-        </FormControl> : ''}
-    </div>
-  );
 };
 
 ControlsRow1.propTypes = {
@@ -118,6 +124,7 @@ ControlsRow1.propTypes = {
   selectHandleChange: PropTypes.func.isRequired,
   jobAddStage: PropTypes.number.isRequired,
   returnToStage1: PropTypes.func.isRequired,
+  confirmJobListAddOnClick: PropTypes.func,
 };
 
 const controlRows2Text = (jobAddStage) => {
@@ -153,7 +160,12 @@ ControlsRow2.propTypes = {
 
 const ControlsArea = (props) => {
   const {
-    classes, selectedForm, selectHandleChange, jobAddStage, returnToStage1,
+    classes,
+    selectedForm,
+    selectHandleChange,
+    jobAddStage,
+    returnToStage1,
+    confirmJobListAddOnClick,
   } = props;
   return (
     <AppBar color="default" className={classes.controlsArea}>
@@ -163,6 +175,7 @@ const ControlsArea = (props) => {
         classes={classes}
         selectedForm={selectedForm}
         selectHandleChange={selectHandleChange}
+        confirmJobListAddOnClick={confirmJobListAddOnClick}
       />
       <ControlsRow2 classes={classes} jobAddStage={jobAddStage} />
     </AppBar>
@@ -175,6 +188,7 @@ ControlsArea.propTypes = {
   selectHandleChange: PropTypes.func.isRequired,
   jobAddStage: PropTypes.number.isRequired,
   returnToStage1: PropTypes.func.isRequired,
+  confirmJobListAddOnClick: PropTypes.func,
 };
 
 export default withStyles(styles, { withTheme: true })(ControlsArea);
